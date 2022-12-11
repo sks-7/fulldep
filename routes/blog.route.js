@@ -12,6 +12,12 @@ blogController.get('/', async (req, res) => {
   res.send(blogs);
 });
 
+blogController.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findOne({ _id: id });
+  res.send(user);
+});
+
 blogController.post('/create', async (req, res) => {
   const { Title, Category, Author, Content, userId } = req.body;
   const blog = new blogModel({
